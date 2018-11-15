@@ -1,0 +1,19 @@
+  <% if current_user.favo?(post) %>
+    <%= form_for(current_user.favorites.find_by(micropost_id: post.id), html: { method: :delete }) do |f| %>
+      <%= hidden_field_tag :favo, post.id %>
+      <!--<%#= link_to("/favorites/#{post.id}", {method: "post"}) do %>-->
+      <!--  <span class="fa fa-heart like-btn"></span>-->
+      <!--<#% end %>-->
+      <%= f.submit 'いいね解除', class: 'btn btn-xs btn-primary' %>
+      <%#= f.submit 'いいね解除', class: 'btn btn-danger btn-block' %>
+    <% end %>
+  <% else %>
+    <%= form_for(current_user.favorites.build) do |f| %>
+      <%= hidden_field_tag :favo, post.id %>
+      <%#= link_to("/favorites", {method: "post"}) do %>
+        <!--<span class="fa fa-heart like-btn-unlike"></span>-->
+      <%# end %>
+       <%= f.submit 'いいね', class: 'btn btn-xs btn-primary' %>
+              <%#= f.submit 'いいね', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  <% end %>
